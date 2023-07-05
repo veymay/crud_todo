@@ -1,14 +1,25 @@
 @import url("https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&display=swap");
 @import url("https://cdn-uicons.flaticon.com/uicons-bold-rounded/css/uicons-bold-rounded.css");
 :root {
+  --main_color: #f5c400;
   --text_color: #626264;
   --dark_color: #2f2f32;
   --deeb_dark_color: #161617;
 }
 ::selection {
-  background: #f5c400;
+  background: var(--main_color);
   color: var(--deeb_dark_color);
   padding: 10px;
+}
+::-webkit-scrollbar {
+  width: 10px;
+  z-index: 100;
+  background-color: var(--dark_color);
+}
+::-webkit-scrollbar-thumb {
+  background-color: ;
+  opacity: 1;
+  box-shadow: 0 -100vh 0 98vh var(--main_color);
 }
 * {
   margin: 0;
@@ -21,9 +32,19 @@
   font-family: "Instrument Sans", sans-serif;
 }
 body {
-  margin: 50px auto;
-  width: 800px;
   background: var(--deeb_dark_color);
+}
+.container {
+  margin: auto;
+  max-width: 800px;
+}
+.row {
+  width: 100%;
+  height: 100vh;
+  padding: 3vh;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
 }
 button {
   font-weight: bold;
@@ -43,7 +64,7 @@ form.todo_add input {
   font-weight: 500;
 }
 form.todo_add button {
-  background: #f5c400;
+  background: var(--main_color);
   position: absolute;
   top: 8px;
   right: 8px;
@@ -67,6 +88,8 @@ form.todo_add button ion-icon {
   --ionicon-stroke-width: 46px;
 }
 ul.todo_list {
+  max-height: 75vh;
+  overflow: auto;
   padding: 20px;
   background: var(--dark_color);
   border-radius: 15px;
@@ -79,63 +102,29 @@ ul.todo_list li {
   cursor: pointer;
   border-radius: 7px;
   position: relative;
-  top: -5px;
-}
-ul.todo_list li:first-child {
-  position: relative;
-  top: 0;
+  color: var(--main_color);
+  user-select: none;
 }
 ul.todo_list li:before {
   content: "";
-  width: 97%;
-  height: 2px;
-  background: #3b3b41;
+  margin: auto;
   position: absolute;
+  top: 0;
+  left: 15px;
   bottom: 0;
-  right: 8px;
-  border-radius: 1px;
-}
-ul.todo_list li:last-child:before {
-  height: 0;
+  width: 24px;
+  height: 24px;
+  border-radius: 5px;
+  background: var(--main_color);
 }
 ul.todo_list li:hover {
   background: #3b3b41;
+  text-decoration: line-through;
 }
-ul.todo_list li input[type="checkbox"] {
-  margin: auto;
-  width: 0px;
-  height: 0px;
-  position: relative;
-  background: red;
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 15px;
+ul.todo_list li.active {
+  text-decoration: line-through;
+  color: var(--text_color);
 }
-ul.todo_list li input[type="checkbox"]:before {
-  margin: auto;
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  width: 24px;
-  height: 24px;
+ul.todo_list li.active:before {
   background: var(--text_color);
-  border-radius: 5px;
-}
-/* ul.todo_list li input[type="checkbox"]:after {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 24px;
-  height: 24px;
-  background: #f5c400 url("../img/svg/2.svg") center/20px no-repeat;
-  border-radius: 5px;
-} */
-ul.todo_list li input[type="checkbox"]:checked {
-  width: 0;
-  height: 0;
 }
