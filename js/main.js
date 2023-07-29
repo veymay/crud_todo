@@ -1,34 +1,50 @@
-'use strict'
+let input = document.querySelector('.todo_input'),
+  list = document.querySelector('.todo_list'),
+  listItem = document.querySelectorAll('.todo_list>li'),
+  todos = JSON.parse(localStorage.getItem('todos'))?JSON.parse(localStorage.getItem('todos')):[] 
+// document.addEventListener('click', () => {
+//   input.focus()
+// })
 
-let todoAddInput = document.querySelector('.todo_add>input'),
-todoAddButton = document.querySelector('.todo_add>button'),
-todoList = document.querySelector('.todo_list'),
-todoItem = document.querySelectorAll('.todo_list>li'),
-todoItemCheckbox = document.querySelectorAll('.todo_list>li>input')
-
-document.addEventListener('keydown', () => {
-  todoAddInput.focus()
-})
-document.addEventListener('keydown', (e) => {
-  todoAddInput.focus()
-  if (e.key == "Enter") {
-    if (todoAddInput.value.length>2) {
-      todoList.innerHTML += `<li>${todoAddInput.value}</li>`
-      todoAddInput.value = ''
-    }
+getTodo(todos)
+// Set TODO
+function setTodo(inp,arr) {
+  if (inp.value.length > 3) {
+    inp.value.trim()
+    arr.push(inp.value)
+    inp.value = ''
+    localStorage.setItem('todos',JSON.stringify(todos))
+    console.log(arr);
   }
-})
+}
+// Get TODO
+function getTodo(todoArr) {
+  todoArr.forEach(todoItem => {
+    list.innerHTML += `<li class='items'>${todoItem}<div class="buttons"><span class="edit"><i class="fi fi-br-pencil"></i></span> <span class="remove"><i class="fi fi-br-cross"></i></span> </div></li>`
+  });
+}
 
-todoAddButton.addEventListener('click', () => {
-  if (todoAddInput.value.length>2) {
-    todoList.innerHTML += `<li>${todoAddInput.value}</li>`
-    todoAddInput.value = ''
-  }
-})
-
-todoItem.forEach(item => {
-  item.addEventListener('click', (e) => {
-    e.stopPropagation()
-    e.classList.toggle('active')
+// Complete TODO
+listItem.forEach(element => {
+  element.addEventListener('click', () => {
+    alert('s')
   })
 });
+// Remove TODO
+function removeTodo(todoArr) {
+  todoArr.forEach(todoItem => {
+    todoItem.remove
+  });
+}
+// /////////////////////////////////////////////
+document.addEventListener('keydown', (e) => {
+  input.focus()
+  if (e.key == 'Enter') {
+    setTodo(input, todos)
+    list.innerHTML = ''
+    getTodo(todos)
+  } 
+})
+
+
+// list.innerHTML+=`<li class='item'>${input.value}</li>`

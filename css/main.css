@@ -1,24 +1,27 @@
-@import url("https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&display=swap");
 @import url("https://cdn-uicons.flaticon.com/uicons-bold-rounded/css/uicons-bold-rounded.css");
+@import url("https://fonts.googleapis.com/css2?family=Ubuntu:wght@100;200;300;400;500;600;700&display=swap");
+
 :root {
-  --main_color: #f5c400;
-  --text_color: #626264;
-  --dark_color: #2f2f32;
-  --deeb_dark_color: #161617;
+  --main: #f5c400;
+  --alert: #c74a4a;
+  --text: #626264;
+  --dark: #2f2f32;
+  --deeb: #161617;
 }
 ::selection {
-  background: var(--main_color);
-  color: var(--deeb_dark_color);
+  background: var(--main);
+  color: var(--deeb);
   padding: 10px;
 }
 ::-webkit-scrollbar {
   width: 10px;
   z-index: 100;
-  background-color: var(--dark_color);
+  background-color: var(--dark);
 }
 ::-webkit-scrollbar-thumb {
   opacity: 1;
-  box-shadow: 0 -100vh 0 98vh var(--main_color);
+  background: var(--main);
+  border-radius: 5px;
 }
 * {
   margin: 0;
@@ -28,14 +31,18 @@
   outline: none;
   border: none;
   box-sizing: border-box;
-  font-family: "Instrument Sans", sans-serif;
+  font-family: "Ubuntu", sans-serif;
 }
 body {
-  background: var(--deeb_dark_color);
+  background: var(--deeb);
+}
+i.fi {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .container {
   margin: auto;
-  max-width: 800px;
 }
 .row {
   width: 100%;
@@ -46,29 +53,34 @@ body {
 }
 button {
   font-weight: bold;
-  font-family: "Instrument Sans", sans-serif;
+}
+.todo {
+  margin: auto;
+  max-width: 500px;
+  background: var(--dark);
+  border-radius: 15px;
+  overflow: hidden;
 }
 .todo_add {
-  margin: 0 0 30px;
   position: relative;
 }
 .todo_add input {
   width: 100%;
-  padding: 20px 165px 20px 20px;
-  background: var(--dark_color);
+  padding: 20px 170px 20px 25px;
+  background: inherit;
   border-radius: 15px;
   color: #fff;
-  font-size: 20px;
+  font-size: 24px;
   font-weight: 500;
 }
 .todo_add button {
-  background: var(--main_color);
+  background: var(--main);
   position: absolute;
   top: 8px;
   right: 8px;
-  font-size: 18px;
+  font-size: 20px;
   font-weight: bold;
-  padding: 13px 20px 13px 45px;
+  padding: 13px 20px;
   border-radius: 7px;
   cursor: pointer;
   letter-spacing: 0.5px;
@@ -88,18 +100,19 @@ button {
 ul.todo_list {
   max-height: 75vh;
   overflow: auto;
-  background: var(--dark_color);
-  border-radius: 15px;
 }
 ul.todo_list li {
-  padding: 15px 0 15px 55px;
+  padding: 15px 10px 15px 55px;
   color: #fff;
   font-weight: 500;
-  font-size: 20px;
+  font-size: 24px;
   cursor: pointer;
   position: relative;
-  color: var(--main_color);
+  color: var(--main);
   user-select: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 ul.todo_list li:before {
   content: "";
@@ -111,15 +124,30 @@ ul.todo_list li:before {
   width: 24px;
   height: 24px;
   border-radius: 5px;
-  background: var(--main_color);
+  background: var(--main);
 }
 ul.todo_list li:hover {
   background: #3b3b41;
 }
-ul.todo_list li.active {
+ul.todo_list li.completed {
   text-decoration: line-through;
-  color: var(--text_color);
+  color: var(--text);
 }
-ul.todo_list li.active:before {
-  background: var(--text_color);
+ul.todo_list li.completed:before {
+  background: var(--text);
+}
+ul.todo_list li .buttons {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+ul.todo_list li span {
+  border-radius: 5px;
+  background: var(--text);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  font-size: 12px;
 }
