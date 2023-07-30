@@ -17,6 +17,9 @@
   width: 10px;
   z-index: 100;
   background-color: var(--dark);
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 ::-webkit-scrollbar-thumb {
   opacity: 1;
@@ -125,6 +128,14 @@ ul.todo_list li:before {
   height: 24px;
   border-radius: 5px;
   background: var(--main);
+}
+ul.todo_list li .content {
+  height: 100%;
+  max-width: 83%;
+  width: 83%;
+  display: flex;
+  align-items: center;
+  word-break: break-all;
 }
 ul.todo_list li:hover {
   background: #3b3b41;
