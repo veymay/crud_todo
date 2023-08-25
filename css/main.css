@@ -3,16 +3,19 @@
 
 :root {
   --main: #f5c400;
+  --success: #7dba28;
   --alert: #c74a4a;
   --text: #626264;
   --dark: #2f2f32;
   --deeb: #161617;
 }
+
 ::selection {
   background: var(--main);
   color: var(--deeb);
   padding: 10px;
 }
+
 ::-webkit-scrollbar {
   width: 10px;
   z-index: 100;
@@ -21,11 +24,13 @@
   top: 0;
   left: 0;
 }
+
 ::-webkit-scrollbar-thumb {
   opacity: 1;
   background: var(--main);
   border-radius: 5px;
 }
+
 * {
   margin: 0;
   padding: 0;
@@ -36,25 +41,31 @@
   box-sizing: border-box;
   font-family: "Ubuntu", sans-serif;
 }
+
 body {
   background: var(--deeb);
 }
+
 i.fi {
-  display: flex;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
 }
+
 .container {
   margin: auto;
 }
+
 .row {
   padding: 3vh;
   display: flex;
   flex-direction: column;
 }
+
 button {
   font-weight: bold;
 }
+
 .todo {
   margin: auto;
   max-width: 500px;
@@ -62,10 +73,12 @@ button {
   border-radius: 15px;
   overflow: hidden;
 }
+
 .todo_add {
   position: relative;
 }
-.todo_add input {
+
+.todo_add .form input {
   width: 100%;
   padding: 20px 170px 20px 25px;
   background: inherit;
@@ -74,7 +87,8 @@ button {
   font-size: 24px;
   font-weight: 500;
 }
-.todo_add button {
+
+.todo_add .form button {
   background: var(--main);
   position: absolute;
   top: 8px;
@@ -89,32 +103,80 @@ button {
   align-items: center;
   justify-content: center;
 }
-.todo_add button ion-icon {
-  margin: auto;
-  font-size: 24px;
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 20px;
-  --ionicon-stroke-width: 46px;
-}
-ul.todo_list {
-  max-height: 75vh;
-  overflow: auto;
-}
-ul.todo_list li {
-  padding: 15px 10px 15px 55px;
-  color: #fff;
-  font-weight: 500;
-  font-size: 24px;
-  cursor: pointer;
-  position: relative;
-  color: var(--main);
-  user-select: none;
+
+.info {
+  padding: 10px 10px 10px 20px;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  font-size: 20px;
+  font-weight: bold;
+  color: var(--main);
+  /* background: red; */
+  border-top: 2px solid var(--text);
+  display: flex;
+  align-items: center;
 }
+
+.info .number {
+  display: flex;
+  gap: 2px;
+}
+
+.info .number .counts {
+  min-width: 50px;
+  padding: 5px 8px;
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+  gap: 3px;
+  color: var(--dark);
+  border-radius: 50px;
+}
+
+.info .number .counts i.fi {
+  margin-top: 1px;
+}
+
+.info .number .counts:nth-child(1) {
+  background: var(--main);
+}
+
+.info .number .counts:nth-child(2) {
+  background: var(--success);
+}
+
+.info .number .counts:nth-child(3) {
+  background: var(--alert);
+}
+
+ul.todo_list {
+  max-height: 75vh;
+  overflow: auto;
+  overflow-x: hidden;
+}
+
+ul.todo_list li {
+  padding: 15px 10px 15px 55px;
+  color: #fff;
+  cursor: pointer;
+  position: relative;
+  user-select: none;
+  display: flex;
+  align-items: stretch;
+  justify-content: space-between;
+}
+
+ul.todo_list li.completed {
+  text-decoration: line-through;
+  color: var(--text);
+  filter: grayscale(1);
+}
+
+ul.todo_list li.completed input {
+  text-decoration: line-through;
+}
+
 ul.todo_list li:before {
   content: "";
   margin: auto;
@@ -122,34 +184,67 @@ ul.todo_list li:before {
   top: 0;
   left: 15px;
   bottom: 0;
-  width: 24px;
-  height: 24px;
+  width: 30px;
+  height: 30px;
   border-radius: 5px;
   background: var(--main);
 }
+
+ul.todo_list li.completed:before {
+  background: var(--text);
+}
+
 ul.todo_list li .content {
-  height: 100%;
+  min-height: 100%;
   max-width: 83%;
   width: 83%;
   display: flex;
   align-items: center;
   word-break: break-all;
+  position: relative;
+  font-weight: 500;
+  font-size: 24px;
+  color: var(--main);
 }
+
+ul.todo_list li .content input {
+  padding: 5px;
+  width: 100%;
+  height: 100%;
+  color: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: 5px;
+  background: inherit;
+  border: 2px solid transparent;
+  cursor: pointer;
+}
+
+ul.todo_list li .content input.active {
+  border-color: var(--main);
+  cursor: text;
+}
+
 ul.todo_list li:hover {
   background: #3b3b41;
 }
-ul.todo_list li.completed {
-  text-decoration: line-through;
-  color: var(--text);
-}
-ul.todo_list li.completed:before {
-  background: var(--text);
-}
+
 ul.todo_list li .buttons {
   display: flex;
   align-items: center;
   gap: 5px;
+  transform: translateX(80px);
+  transition: 0.2s;
+  filter: grayscale(0) !important;
 }
+
+ul.todo_list li .buttons.active {
+  transform: translateX(0px);
+}
+
 ul.todo_list li span {
   border-radius: 5px;
   background: var(--text);
@@ -159,4 +254,9 @@ ul.todo_list li span {
   width: 30px;
   height: 30px;
   font-size: 12px;
+  transition: .3s;
+}
+
+ul.todo_list li:hover .buttons {
+  transform: translateX(0);
 }
