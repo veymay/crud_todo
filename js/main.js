@@ -1,27 +1,54 @@
 let todoInp = document.querySelector('.todo_input')
+let todoBtn = document.querySelector('.todo_btn')
 let todoList = document.querySelector('ul.todo_list')
+let date = document.querySelector('.date')
+let time = document.querySelector('.time')
 let numberAll = document.querySelector('.number>.all')
 let todoListItems = document.querySelectorAll('ul.todo_list>.item')
 let todos = JSON.parse(localStorage.getItem('todosLIST')) ? JSON.parse(localStorage.getItem('todosLIST')) : []
-setInterval(() => {
-}, 1000);
+
 function setTODO() {
   localStorage.setItem('todosLIST', JSON.stringify(todos))
 }
-
+//* Date
+function myDate() {
+  let today = new Date();
+  let dd = String(today.getDate()).padStart(2, '0');
+  let mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+  let yyyy = today.getFullYear();
+  today = mm + '.' + dd + '.' + yyyy;
+  date.innerHTML = today
+}
+//? Time
+function myTime() {
+  var d = new Date();
+  var s = d.getSeconds();
+  var m = d.getMinutes();
+  var h = d.getHours();
+  time.textContent =
+    ("0" + h).substr(-2) + ":" + ("0" + m).substr(-2) + ":" + ("0" + s).substr(-2);
+}
+setInterval(myTime, 1000, myDate());
 //* Add TODO
+function addTODO() {
+  if (todoInp.value != '') {
+    todos.push({
+      text: todoInp.value,
+      completed: ''
+    })
+    setTODO()
+    todoInp.value = ''
+    showTODO()
+  }
+}
+addTODO()
 document.addEventListener('keydown', (e) => {
   if (e.key == 'Enter') {
-    if (todoInp.value != '') {
-      todos.push({
-        text: todoInp.value,
-        completed: ''
-      })
-      setTODO()
-      todoInp.value = ''
-      showTODO()
-    }
+    addTODO()
   }
+})
+todoBtn.addEventListener('click', () => {
+  addTODO()
 })
 //* Show TODO
 function showTODO() {

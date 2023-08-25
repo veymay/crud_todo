@@ -118,6 +118,15 @@ button {
   align-items: center;
 }
 
+.info .today {
+  display: flex;
+  gap: 10px;
+}
+
+.info .today .time {
+  color: var(--success);
+}
+
 .info .number {
   display: flex;
   gap: 2px;
@@ -237,7 +246,7 @@ ul.todo_list li .buttons {
   align-items: center;
   gap: 5px;
   transform: translateX(80px);
-  transition: 0.2s;
+  transition: 0.1s;
   filter: grayscale(0) !important;
 }
 
