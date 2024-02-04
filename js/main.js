@@ -29,6 +29,7 @@ function myTime() {
     ("0" + h).substr(-2) + ":" + ("0" + m).substr(-2) + ":" + ("0" + s).substr(-2);
 }
 setInterval(myTime, 1000, myDate());
+
 //* Add TODO
 function addTODO() {
   if (todoInp.value != '') {
@@ -56,12 +57,13 @@ function showTODO() {
   numberAll.innerHTML = `<i class="fi fi-br-dot-circle"></i>${todos.length}`
   todos.forEach((todo, id) => {
     todoList.innerHTML += `
-    <li class='item ${todo.completed}'>
+    <li class='item ${todo.completed}' onclick='event.stopPropagation();completedTODO(${id})'>
+    <span class="icon"></span>
     <div class="content">
     <input type="text" value="${todo.text}" readonly>
     </div>
     <div class="buttons">
-    <span class="edit" onclick="editTODO(${id})">
+    <span class="edit" onclick="event.stopPropagation();editTODO(${id})">
     <i class="fi fi-br-pencil"></i>
     </span>
     <span class="remove" onclick="delTODO(${id})">
@@ -72,21 +74,15 @@ function showTODO() {
     todoListItems = document.querySelectorAll('ul.todo_list>.item')
   });
 }
-showTODO()
-//? Completed TODO
-todoListItems.forEach((item, id) => {
-  item.addEventListener('click', () => {
-    console.log('salom');
-    todos[id].completed == '' ? todos[id].completed = 'completed' : todos[id].completed = ''
-    setTODO()
-  })
-})
-todoListItems.forEach((item, id) => {
-  item.addEventListener('click', () => {
-    showTODO()
-  })
-})
 
+//* Completed TODO
+function completedTODO(id) {
+  todos[id].completed == '' ? todos[id].completed = 'completed' : todos[id].completed = ''
+  setTODO()
+  showTODO()
+}
+
+showTODO()
 //? Edit TODO
 function editTODO(id) {
   let buttons = document.querySelectorAll('.buttons')

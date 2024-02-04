@@ -1,5 +1,7 @@
 @import url("https://cdn-uicons.flaticon.com/uicons-bold-rounded/css/uicons-bold-rounded.css");
-@import url("https://fonts.googleapis.com/css2?family=Ubuntu:wght@100;200;300;400;500;600;700&display=swap");
+@import url(https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;800;900&display=swap);
+
+body {}
 
 :root {
   --main: #f5c400;
@@ -40,6 +42,7 @@
   border: none;
   box-sizing: border-box;
   font-family: "Ubuntu", sans-serif;
+  font-family: 'Inter', sans-serif;
 }
 
 body {
@@ -159,7 +162,7 @@ button {
 }
 
 ul.todo_list {
-  max-height: 75vh;
+  max-height: 70vh;
   overflow: auto;
   overflow-x: hidden;
 }
@@ -181,20 +184,27 @@ ul.todo_list li.completed {
   filter: grayscale(1);
 }
 
+ul.todo_list li.completed span.icon {
+  background: transparent url("../img/check.svg") center/cover no-repeat;
+}
+
 ul.todo_list li.completed input {
   text-decoration: line-through;
 }
 
-ul.todo_list li:before {
-  content: "";
+ul.todo_list li.completed .buttons {
+  opacity: 0;
+}
+
+ul.todo_list li span.icon {
   margin: auto;
   position: absolute;
-  top: 0;
+  top: 2px;
   left: 15px;
   bottom: 0;
-  width: 30px;
-  height: 30px;
-  border-radius: 5px;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
   background: var(--main);
 }
 
